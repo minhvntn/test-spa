@@ -1,0 +1,499 @@
+body {
+    font-family: 'Arial', sans-serif;
+    /* background-image: url('rws.png'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;  */
+
+  }
+
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    color: black;
+    text-align: center;
+  }
+
+  #footerText {
+    padding: 15px 0;
+    display: flex;
+    align-items: center; /* This aligns the <img>, text, and <a> tag vertically in the center */
+    /* Remove text-align if you have it set, as it's not needed with flex alignment */
+}
+
+  .search-icon {
+    position: fixed;
+    right: 20px;;
+    top: 35px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 10px;
+    font-size: 24px;
+  }
+
+
+.splash-ai-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Full height of the parent container */
+  }
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Full height of the parent container */
+}
+
+
+#withOutAifollowUp {
+  display: block; /* show by default */
+  height: 30px; /* Set the height to 20px */
+  /* Add any additional styling as needed */
+}
+
+  .ai-as-you-type-source-link {
+    font-size: 95%; 
+    color: blue; 
+    text-decoration: underline;
+  }
+  .ai-source-link {
+    font-size: 95%; 
+    color: blue; 
+    text-decoration: underline;
+  }
+  
+
+
+  /* You might also want to style the buttons that are created dynamically in JavaScript */
+
+  .loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+  .modal-ai {
+    /* display: none; */
+    position: fixed;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 790px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 10px;
+  }
+
+  .modal-ai.active {
+    display: block;
+  }
+
+/* The modal-ai Backdrop */
+.modal-ai-backdrop {
+  /* display: none; */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.q-follow-up, #aiFollowUp label {
+  vertical-align: middle;
+}
+.q-follow-up {
+  -webkit-appearance: none; /* Removes default styles for webkit browsers */
+  -moz-appearance: none; /* Removes default styles for Mozilla browsers */
+  appearance: none; /* Removes default styles */
+  width: 50px; /* Width of the switch */
+  height: 24px; /* Height of the switch */
+  background: grey; /* Default background color */
+  border-radius: 12px; /* Makes it round */
+  position: relative;
+  cursor: pointer; /* Changes the cursor to a pointer */
+  outline: none; /* Removes the outline */
+  -webkit-transition: .4s; /* Smooth transition */
+  transition: .4s;
+  margin: 10px 20px 10px 12px;
+}
+
+.q-follow-up:checked {
+  background-color: blue; /* Background color when switched on */
+}
+
+.q-follow-up:before {
+  content: '';
+  position: absolute;
+  width: 20px; /* Width of the circle */
+  height: 20px; /* Height of the circle */
+  left: 2px; /* Small space on the left side */
+  bottom: 2px; /* Aligns the circle to the bottom */
+  background-color: white; /* Color of the circle */
+  -webkit-transition: .4s; /* Smooth transition */
+  transition: .4s;
+  border-radius: 50%; /* Makes it round */
+}
+
+.q-follow-up:checked:before {
+  -webkit-transform: translateX(26px); /* Moves the circle to the right */
+  -ms-transform: translateX(26px); /* For IE */
+  transform: translateX(26px); /* Moves the circle to the right */
+}
+
+
+
+
+.search-box {
+  width: 90%!important;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.fa-file-pdf {
+  color: #E3342F; /* PDF icon color */
+}
+
+.fa-file-word {
+  color: #2B579A; /* Word icon color */
+}
+.followup-button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: auto;
+}
+
+.new-question-button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+  .ask-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+
+Default styles for mobile devices
+.search-results, .chat-container {
+  max-height: 300px;
+}
+@media screen and (min-height: 500px) {
+  .search-results, .chat-container {
+    max-height: 350px;
+  }
+}
+
+@media screen and (min-height: 525px) {
+  .search-results, .chat-container {
+    max-height: 375px;
+  }
+}
+
+@media screen and (min-height: 550px) {
+  .search-results, .chat-container {
+    max-height: 410px;
+  }
+}
+
+@media screen and (min-height: 575px) {
+  .search-results, .chat-container {
+    max-height: 420px;
+  }
+}
+
+@media screen and (min-height: 600px) {
+  .search-results, .chat-container {
+    max-height: 440px;
+  }
+}
+
+@media screen and (min-height: 650px) {
+  .search-results, .chat-container {
+    max-height: 490px;
+  }
+}
+
+@media screen and (min-height: 700px) {
+  .search-results, .chat-container {
+    max-height: 560px;
+  }
+}
+
+
+
+@media screen and (min-height: 725px) {
+  .search-results, .chat-container {
+    max-height: 590px;
+  }
+}
+
+@media screen and (min-height: 800px) {
+  .search-results, .chat-container {
+    max-height: 620px;
+  }
+}
+
+@media screen and (min-height: 840px) {
+  .search-results, .chat-container {
+    max-height: 620px;
+  }
+}
+
+@media screen and (min-height: 900px) {
+  .search-results, .chat-container {
+    max-height: 620px;
+  }
+}
+  .search-results {
+    height: 100%;
+    margin-top: 10px;
+    overflow-y: auto;
+  }
+
+  .result-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+
+.chat-container {
+  height: 100%;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.user-message, .ai-message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.message-bubble {
+  padding: 10px;
+  border-radius: 15px;
+  margin-left: 10px;
+}
+
+.user-message .message-bubble {
+  background-color: #289691;
+  align-self: flex-start;
+  color: white;
+}
+
+.ai-message .message-bubble {
+  background-color: #F4F4F4;
+  color: black;
+  align-self: flex-end;
+}
+
+.user-icon, .ai-icon {
+  width: 30px;
+  height: 30px;
+  /* Icons or images representing the user and AI */
+}
+
+.thumbs-up-button, .thumbs-down-button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 18px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.thumbsAiClicked {
+  color: #4CAF50; /* New color indicating the button has been clicked */
+  transform: scale(0.9); /* Reduces the size to 80% */
+  pointer-events: none; /* Disables further clicking */
+}
+.thumbsAiNotClicked {
+  color: #c1c3c1; /* New color indicating the button has been clicked */
+  transform: scale(0.7); /* Reduces the size to 80% */
+  pointer-events: none; /* Disables further clicking */
+}
+
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.check-mark {
+  margin-left: 10px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s forwards;
+}
+
+.modal-ai-header {
+  height: 71px;
+  display: flex; /* Use flexbox layout */
+  justify-content: space-between; /* Space out the children */
+  align-items: center; /* Align items vertically */
+  flex-wrap: nowrap; /* Prevent wrapping of items */
+  padding: 10px; /* Add some padding for spacing */
+  border-bottom: 1px solid #b3b3b3; /* This adds a grey line at the bottom */
+}
+
+/* Adjust the search box to take up 70% of the modal-ai-header */
+.search-box {
+  width: 100%;
+  margin-right: 10px; /* Add some margin to the right of the search box */
+}
+
+/* Adjust the Ask AI button to take less space */
+.ask-button {
+  flex: 0 0 auto; /* Do not grow or shrink, only take up as much space as needed */
+  margin-right: 10px; /* Add some margin to the right of the button */
+}
+
+/* Keep the follow-up and new question buttons hidden initially */
+.followup-button,
+.new-question-button {
+  display: none; /* Keep these buttons hidden initially */
+  flex: 0 0 auto; /* Do not grow or shrink, only take up as much space as needed */
+}
+
+/* Style for when the follow-up and new question buttons are shown */
+.followup-button.active,
+.new-question-button.active {
+  display: inline-block; /* Show these buttons */
+  padding: 0 10px;
+}
+
+
+/* Ensure that the buttons do not wrap on small screens */
+@media (max-width: 600px) {
+  .modal-ai {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+  }
+  .ask-button {
+    margin-right: 5px; /* Reduce margin on small screens */
+  }
+}
+
+
+
+/* The Modal (background) */
+.custom-ai-alert-box {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* modal-ai Content */
+.custom-ai-alert-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 10px; /* Adjust as needed */
+}
+
+
+/* The Close Button */
+.custom-alert-closebtn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.custom-alert-closebtn:hover,
+.custom-alert-closebtn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.close-ai {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+.close-ai:hover {
+  opacity: 1;
+}
+.close-ai:before, .close-ai:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 22px;
+  width: 2px;
+  background-color: #333;
+}
+.close-ai:before {
+  transform: rotate(45deg);
+}
+.close-ai:after {
+  transform: rotate(-45deg);
+}

@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 512m
+  name: %BRANCH%-spa
+  namespace: %BRANCH%
+spec:
+  rules:
+    - host: author-spa.%BRANCH%.%REGION%.magnolia-platform.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: %BRANCH%-spa-magnolia-helm-frontend-author-svc
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+    - host: public-spa.%BRANCH%.%REGION%.magnolia-platform.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: %BRANCH%-spa-magnolia-helm-frontend-public-svc
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - a-spa.%REGION%.magnolia-platform.com
+        - author-spa.%BRANCH%.%REGION%.magnolia-platform.com
+        - public-spa.%BRANCH%.%REGION%.magnolia-platform.com
+      secretName: %BRANCH%-spa.%REGION%.magnolia-platform.com

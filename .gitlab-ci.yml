@@ -1,0 +1,94 @@
+stages:
+  - install-node-dependencies
+  - build
+  - deploy
+
+install-node-dependencies:
+  stage: install-node-dependencies
+  image: node:20
+  cache: &node_modules_cache
+    key:
+      files:
+        - spa/package-lock.json
+    paths:
+      - spa/node_modules
+      - http-server/node_modules
+    policy: pull-push
+  script:
+    - (cd spa && npm install); (cd http-server && npm install)
+  only:
+    changes:
+      - spa/package-lock.json
+      - http-server/package-lock.json
+      - .gitlab-ci.yml
+
+build-spa:
+  stage: build
+  image: gcr.io/kaniko-project/executor:v1.8.0-debug
+  cache:
+    <<: *node_modules_cache
+    policy: pull
+  before_script:
+    - export GIT_TAG=$CI_COMMIT_SHORT_SHA
+    - export DOCKER_BUILDKIT=1
+    - export MAGNOLIA_DOCKER_SPA=$CI_REGISTRY_IMAGE/${CI_COMMIT_BRANCH}-spa
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+  script: '/kaniko/executor --context . --dockerfile ./Dockerfile --destination "$MAGNOLIA_DOCKER_SPA:$GIT_TAG"'
+  # rules:
+  #   - changes: &spa_only
+  #       - http-server/**/*
+  #       - spa/**/*
+  #       - .gitlab-ci.yml
+
+deploy-spa:
+  stage: deploy
+  image: registry.magnolia-platform.com/developers-artifact/spa-nodejs:1.0.3
+  environment:
+    name: apac-sandbox
+  before_script:
+    - export KUBECTL_NAMESPACE=icare
+    - export MAGNOLIA_RELEASE=icare
+    - export GIT_TAG=$CI_COMMIT_SHORT_SHA
+    - export MAGNOLIA_DOCKER_AUTHOR=$CI_REGISTRY_IMAGE/${CI_COMMIT_BRANCH}-spa
+    - export MAGNOLIA_DOCKER_PUBLIC=$CI_REGISTRY_IMAGE/${CI_COMMIT_BRANCH}-spa
+    - export MAGNOLIA_FRONTEND_PORT="3000"
+    - export MAGNOLIA_FRONTEND_CPU="200m"
+    - export MAGNOLIA_FRONTEND_MEMORY="1Gi"
+    - export MAGNOLIA_FRONTEND_AUTHOR_REPLICAS="1"
+    - export MAGNOLIA_FRONTEND_PUBLIC_REPLICAS="0"
+    - export MAGNOLIA_FRONTEND_APP="spa"
+  script:
+    - export KUBECONFIG=$KUBE_CONFIG
+    - initialpath=$PWD
+    - cd /k8s/base
+    - envsubst < kustomization-multi-template.yaml > kustomization.yaml ; kustomize build . > $initialpath/kustomize-sources/frontend.yaml
+    - cat $initialpath/kustomize-sources/frontend.yaml
+    - kubectl -n $KUBECTL_NAMESPACE apply -k .
+    - cd $initialpath
+    - sed -i "s/%REGION%/$REGIONNAME/g" sales-demo-spa.yaml
+    - sed -i "s/%BRANCH%/$KUBECTL_NAMESPACE/g" sales-demo-spa.yaml
+    - kubectl apply -f sales-demo-spa.yaml
+  # rules:
+  #   - changes: *spa_only
+  when: manual
+
+icare:deploy-light-modules:
+  stage: deploy
+  image: devspacesh/devspace:5.17
+  environment:
+    name: apac-sandbox
+  before_script:
+    - export KUBECONFIG=$KUBE_CONFIG
+    - export DEPLOYMENT=icare
+    - export LIGHT_MODULES_CONTAINER_PATH=/mgnl-home/light-modules
+  script:
+    - kubectl -n $DEPLOYMENT get pods -l "release=$DEPLOYMENT,tier=app" -o name | sed 's/^pod\///' > pods.txt
+    - cat pods.txt
+    - >
+      for pod in `cat pods.txt`; do
+        devspace sync -n $DEPLOYMENT --local-path light-modules/ --pod $pod -c $DEPLOYMENT --container-path=$LIGHT_MODULES_CONTAINER_PATH --initial-sync mirrorLocal --no-watch --upload-only
+      done
+  when: manual
+
+

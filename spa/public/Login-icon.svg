@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.412" height="25.661" viewBox="0 0 19.412 25.661">
+  <g id="Icon-System_Lock" data-name="Icon-System / Lock" transform="translate(0.75 0.75)">
+    <g id="logout">
+      <path id="Shape" d="M0,14.658H17.912V0H0V14.658Z" transform="translate(0 9.504)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="Shape-2" data-name="Shape" d="M0,3.254V0" transform="translate(8.943 16.025)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="Shape-3" data-name="Shape" d="M.82,0A.82.82,0,1,0,1.4.24.82.82,0,0,0,.82,0Z" transform="translate(8.123 14.385)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="Shape-4" data-name="Shape" d="M11.39,5.429A5.7,5.7,0,0,0,0,5.429V9.5H11.39Z" transform="translate(3.267 0)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

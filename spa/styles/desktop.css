@@ -1,0 +1,251 @@
+@media only screen and (min-width: 1024px) {
+  body {
+    font-size: 13px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  nav {
+    display: block;
+    text-align: right;
+  }
+
+  nav > * {
+    display: inline-block;
+  }
+
+  header {
+    position: relative;
+  }
+
+  .lang {
+    display: inline-flex;
+    padding: 0.75rem 0 0.75rem 0.75rem;
+    margin-left: 1rem;
+    vertical-align: middle;
+    border-left: 1px solid #d9d9d9;
+  }
+
+  .Section {
+    margin-bottom: 4.5rem;
+  }
+
+  .Section__image {
+    margin-bottom: -10.5rem;
+  }
+
+  [class*='box'] {
+    padding: 2.25rem 1.5rem 1.5rem;
+  }
+
+  .Banner__imageMask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .Banner__info {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .Card__info {
+    padding: 2.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .Card__info .btn-blue {
+    margin-bottom: 0.75rem;
+  }
+
+  .Quote-wrapper {
+    padding: 10vh;
+  }
+
+  .ConversationalForm__question {
+    display: flex;
+    align-items: center;
+  }
+
+  .ConversationalForm__questionImage {
+    width: 7.5rem;
+    margin: 0 0.75rem 0 0;
+  }
+}
+
+.search-field-search-container {
+  margin: 0 12px;
+}
+
+.search-field-search-input {
+  width: 100%;
+  padding: 10px 20px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.search-field-suggestions-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.search-field-suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-field-suggestion-item:hover {
+  background-color: #f1f1f1;
+}
+
+.search-container {
+  text-align: center;
+  margin: 0 15%;
+  font-size: 1.125rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #003deb;
+}
+
+.result-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.result-filter-container {
+  flex: 1 1 20%;
+  padding-right: 20px;
+  text-align: left;
+}
+
+.facet-list {
+  padding: 8px;
+}
+
+.result-filter-radio {
+  margin-right: 8px;
+}
+
+.search-result-container {
+  flex: 1 1 80%;
+  text-align: left;
+}
+
+.search-result {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.search-result:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-title {
+  font-size: 1.5em;
+  color: #007bff;
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.search-result-title:hover {
+  text-decoration: underline;
+}
+
+.search-result-content {
+  font-size: 1em;
+  color: #333;
+}
+
+.text-center h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #003deb;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.search-footer {
+  display: flex;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20%;
+}
+
+.rows-per-page {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.pagination button, .rows-per-page button, .result-filter-container button {
+  border: none;
+  background-color: #003deb;
+  color: white;
+  padding: 8px 16px;
+  margin: 0 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:disabled, .rows-per-page button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled), .rows-per-page button:hover:not(:disabled) {
+  background-color: #002ea9;
+}
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-item.highlighted {
+  background-color: #ddd; /* or any highlight color you prefer */
+}
+
+@media (max-width: 768px) {
+  .result-container {
+    flex-direction: column;
+  }
+
+  .result-filter-container, .search-result-container {
+    flex: 1 1 100%;
+    padding: 0;
+  }
+}

@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 512m
+    # # Basic auth start
+    # nginx.ingress.kubernetes.io/auth-type: basic
+    # nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    # nginx.ingress.kubernetes.io/auth-realm: 'Please login'
+    # nginx.ingress.kubernetes.io/configuration-snippet: |
+    #   proxy_set_header Authorization $http_authorization;
+    #   more_set_headers "X-Robots-Tag: noindex, nofollow";
+    # # Basic auth end
+  name: %BRANCH%-ins
+  namespace: %BRANCH%
+spec:
+  rules:
+    - host: author-ins.%BRANCH%.%REGION%.magnolia-platform.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: %BRANCH%-ins-magnolia-helm-frontend-author-svc
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+    - host: public-ins.%BRANCH%.%REGION%.magnolia-platform.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: %BRANCH%-ins-magnolia-helm-frontend-public-svc
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - a.%REGION%.magnolia-platform.com
+        - author-ins.%BRANCH%.%REGION%.magnolia-platform.com
+        - public-ins.%BRANCH%.%REGION%.magnolia-platform.com
+      secretName: %BRANCH%-ins.%REGION%.magnolia-platform.com
